@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Calculadora de prazos processuais com o calendário oficial de expediente do TJSP — São Paulo, 2026.">
+  <title>Prazo TJSP — Calculadora de Prazos Processuais</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-head">
+    <div class="shell">
+      <div class="brand">
+        <div class="brand-mark">&#167;</div>
+        <div>
+          <p class="brand-title">Prazo TJSP</p>
+          <p class="brand-sub">Calculadora de prazos processuais</p>
+        </div>
+      </div>
+      <div class="head-meta">S&atilde;o Paulo &middot; 2026</div>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="sheet">
+
+      <section class="calc-intro">
+        <h2 class="calc-title">Calcular prazo</h2>
+        <p class="rule-note">
+          A publica&ccedil;&atilde;o n&atilde;o &eacute; computada.
+          A contagem come&ccedil;a no primeiro dia &uacute;til seguinte.
+        </p>
+      </section>
+
+      <form id="calc-form" class="fields">
+        <div class="field">
+          <label for="dataInicio">Data da publica&ccedil;&atilde;o</label>
+          <input type="date" id="dataInicio" aria-label="Data da publicação">
+        </div>
+        <div class="field">
+          <label for="prazo">Prazo</label>
+          <div class="prazo">
+            <input type="number" id="prazo" min="1" step="1" value="5" aria-label="Prazo em dias úteis">
+            <span class="prazo-unit">dias &uacute;teis</span>
+          </div>
+        </div>
+        <div class="field field-action">
+          <button type="submit" class="calc-btn">Calcular</button>
+        </div>
+      </form>
+
+      <div id="resultado"></div>
+
+      <section class="memoria" id="detalhes" style="display:none">
+        <div class="memoria-head">
+          <h3>Mem&oacute;ria da contagem</h3>
+          <p>Acompanhe cada dia considerado ou exclu&iacute;do do prazo.</p>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Data</th><th>Situa&ccedil;&atilde;o</th><th>Motivo</th><th>Dia</th></tr>
+            </thead>
+            <tbody id="tabela"></tbody>
+          </table>
+        </div>
+      </section>
+
+    </section>
+
+    <section class="calendario">
+      <div class="calendario-head">
+        <div>
+          <h3>Calend&aacute;rio utilizado</h3>
+          <p class="cal-sub">TJSP &middot; S&atilde;o Paulo &middot; 2026</p>
+        </div>
+        <button type="button" id="btnCalendario" class="link-btn" aria-expanded="false">Ver calend&aacute;rio</button>
+      </div>
+      <div class="cal-detalhe" id="calDetalhe" hidden>
+        <ul class="cal-lista" id="calLista"></ul>
+        <p class="cal-nota">
+          + s&aacute;bados e domingos
+          &middot; + recesso forense de 20/12/2026 a 20/01/2027
+        </p>
+      </div>
+    </section>
+
+    <footer class="site-foot">
+      Ferramenta auxiliar &mdash; n&atilde;o substitui a confer&ecirc;ncia do expediente forense
+      aplic&aacute;vel ao processo.
+    </footer>
+  </main>
+
+  <script src="calculadora.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

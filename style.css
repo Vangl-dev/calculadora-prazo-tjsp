@@ -1,0 +1,343 @@
+/* ============================================================================
+   CALCULADORA DE PRAZOS TJSP — ESTILOS
+   Ferramenta jurídica elegante, neutra, com um único acento forte.
+   ============================================================================ */
+
+:root {
+  --bg: #f7f5f1;
+  --panel: #fffdf9;
+  --text: #252525;
+  --muted: #77736c;
+  --border: #e6e1d8;
+  --line: #d8d2c6;
+  --accent: #6f263d;
+  --accent-2: #551c2e;
+  --accent-soft: #f6ede9;
+  --green: #55745f;
+  --green-bg: #f4f7f3;
+  --red: #9a5a56;
+  --red-bg: #fbf7f6;
+  --red-line: #d9b8b4;
+  --gold: #8a6d2f;
+  --gold-bg: #faf6ec;
+  --gold-line: #d8b96a;
+  --final: #4f7082;
+  --final-bg: #f4f8fa;
+  --final-line: #7a9db0;
+  --serif: Georgia, "Times New Roman", Times, serif;
+  --sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; min-height: 100%; }
+
+body {
+  font-family: var(--sans);
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.shell { max-width: 920px; margin: 0 auto; padding: 0 20px 64px; }
+
+/* ---------- Cabeçalho editorial ---------- */
+
+.site-head { border-bottom: 1px solid var(--border); }
+.site-head .shell {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  padding-top: 30px;
+  padding-bottom: 22px;
+}
+
+.brand { display: flex; gap: 16px; align-items: center; }
+
+.brand-mark {
+  width: 40px; height: 40px;
+  display: grid; place-items: center;
+  font-family: var(--serif);
+  font-size: 22px; color: var(--accent);
+  border: 1px solid var(--line);
+}
+
+.brand-title {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 22px; letter-spacing: .04em;
+  color: var(--text);
+}
+
+.brand-sub { margin: 3px 0 0; font-size: 13px; color: var(--muted); }
+
+.head-meta {
+  font-size: 12px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--muted); white-space: nowrap;
+}
+
+/* ---------- Folha principal ---------- */
+
+.sheet {
+  margin-top: 34px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 42px 44px 40px;
+}
+
+.calc-title {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 24px; font-weight: 600; letter-spacing: .01em;
+}
+
+.rule-note {
+  margin: 8px 0 0;
+  font-size: 13.5px; color: var(--muted);
+  max-width: 46ch;
+}
+
+/* ---------- Campos de entrada ---------- */
+
+.fields {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr auto;
+  gap: 34px;
+  align-items: end;
+  margin-top: 30px;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted); font-weight: 600;
+}
+
+.field input {
+  width: 100%;
+  border: none; border-bottom: 1px solid var(--line);
+  background: transparent;
+  padding: 9px 2px;
+  font: inherit; font-size: 16px; color: var(--text);
+  outline: none;
+  border-radius: 0;
+  transition: border-color .15s;
+}
+
+.field input:focus { border-bottom-color: var(--accent); }
+
+.prazo { display: flex; align-items: baseline; gap: 9px; }
+.prazo input { width: 92px; font-variant-numeric: tabular-nums; }
+.prazo-unit { color: var(--muted); font-size: 13px; }
+
+.calc-btn {
+  height: 46px; padding: 0 28px;
+  border: none; border-radius: 0;
+  background: var(--accent); color: #fff;
+  font: inherit; font-size: 12px; font-weight: 600;
+  letter-spacing: .16em; text-transform: uppercase;
+  cursor: pointer;
+  transition: background .15s;
+}
+.calc-btn:hover { background: var(--accent-2); }
+.calc-btn:active { transform: translateY(1px); }
+
+/* ---------- Resultado ---------- */
+
+#resultado { display: none; margin-top: 40px; padding-top: 34px; border-top: 1px solid var(--border); }
+
+.resultado-card {
+  position: relative;
+  display: flex; justify-content: space-between; align-items: flex-end;
+  gap: 32px;
+  padding: 26px 28px 26px 34px;
+  background: #fdfbf7;
+  border: 1px solid #e3dcd1;
+  animation: surgir .35s ease;
+}
+.resultado-card::before {
+  content: "";
+  position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+  background: var(--accent);
+}
+
+.resultado-label {
+  font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--muted); font-weight: 600;
+}
+
+.resultado-data {
+  margin-top: 8px;
+  font-family: var(--serif);
+  font-size: clamp(30px, 6vw, 42px);
+  letter-spacing: .02em;
+  color: var(--accent); font-weight: 600;
+  line-height: 1;
+}
+
+.resultado-meta {
+  display: grid; gap: 7px;
+  text-align: right;
+  font-size: 13px;
+}
+.meta-item { display: flex; justify-content: space-between; gap: 26px; }
+.meta-item span { color: var(--muted); }
+.meta-item strong { font-weight: 600; font-variant-numeric: tabular-nums; }
+
+/* ---------- Memória da contagem ---------- */
+
+.memoria { margin-top: 42px; }
+
+.memoria-head h3 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 20px; font-weight: 600;
+}
+.memoria-head p { margin: 5px 0 0; font-size: 13px; color: var(--muted); }
+
+.table-wrap { overflow-x: auto; margin-top: 18px; }
+
+table { width: 100%; border-collapse: collapse; font-size: 13.5px; min-width: 560px; }
+
+th {
+  text-align: left; padding: 11px 12px;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+}
+
+td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #efeae2;
+  vertical-align: middle;
+}
+
+td:first-child { font-variant-numeric: tabular-nums; }
+td:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+tbody tr:last-child td { border-bottom: 0; }
+
+/* Situações — marcação tipográfica suave (sem pills) */
+
+tr.pub td { color: var(--muted); }
+tr.pub td:first-child { box-shadow: inset 3px 0 0 var(--border); }
+
+tr.ok td { color: var(--text); }
+tr.ok td:first-child { box-shadow: inset 3px 0 0 var(--green); }
+
+tr.skip td { background: var(--red-bg); }
+tr.skip td:first-child { box-shadow: inset 3px 0 0 var(--red-line); }
+tr.skip td:nth-child(3) { color: var(--red); }
+
+tr.inicio td { background: var(--gold-bg); }
+tr.inicio td:first-child { box-shadow: inset 3px 0 0 var(--gold-line); }
+tr.inicio td { font-weight: 600; }
+
+tr.final td { background: var(--final-bg); }
+tr.final td:first-child { box-shadow: inset 3px 0 0 var(--final-line); }
+tr.final td { font-weight: 600; }
+
+.status {
+  font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase;
+  font-weight: 600;
+}
+.status.pub { color: var(--muted); }
+.status.ok { color: var(--green); }
+.status.skip { color: var(--red); }
+.status.inicio { color: var(--gold); }
+.status.final { color: var(--final); }
+
+/* ---------- Calendário utilizado ---------- */
+
+.calendario {
+  margin-top: 26px;
+  background: #faf8f3;
+  border: 1px solid var(--border);
+  padding: 24px 28px;
+}
+
+.calendario-head {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 18px;
+}
+
+.calendario h3 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 17px; font-weight: 600;
+}
+.cal-sub { margin: 4px 0 0; font-size: 13px; color: var(--muted); }
+
+.link-btn {
+  border: 1px solid transparent;
+  background: transparent;
+  padding: 8px 12px;
+  color: var(--accent);
+  font: inherit; font-size: 11px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color .15s, background .15s;
+}
+.link-btn:hover { border-color: #e0d5cf; background: #f4edea; }
+
+.cal-lista {
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+  column-count: 2; column-gap: 36px;
+}
+
+.cal-lista li {
+  display: flex; gap: 16px;
+  padding: 7px 2px;
+  border-bottom: 1px dotted #e2dcd2;
+  font-size: 13px;
+}
+
+.cal-dia {
+  width: 78px; flex: none;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.cal-nome { color: var(--text); }
+
+.cal-nota {
+  margin: 18px 0 0;
+  font-size: 12px; color: var(--muted);
+}
+
+/* ---------- Rodapé ---------- */
+
+.site-foot {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 12px; color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ---------- Microinterações ---------- */
+
+@keyframes surgir {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Responsividade ---------- */
+
+@media (max-width: 760px) {
+  .shell { padding: 0 14px 48px; }
+  .site-head .shell { padding-top: 22px; padding-bottom: 18px; }
+  .brand-title { font-size: 19px; }
+  .sheet { margin-top: 22px; padding: 30px 22px 26px; }
+  .fields { grid-template-columns: 1fr; gap: 22px; }
+  .calc-btn { width: 100%; }
+  .resultado-card { flex-direction: column; align-items: flex-start; gap: 22px; }
+  .resultado-meta { text-align: left; }
+  .meta-item { justify-content: flex-start; }
+  .calendario-head { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .cal-lista { column-count: 1; }
+}
