@@ -48,3 +48,8 @@ Calendário de expediente forense do TJSP:
 https://www.tjsp.jus.br/CanaisComunicacao/Feriados/ExpedienteForense
 
 > **Aviso:** esta ferramenta é apenas auxiliar. A conferência do calendário de expediente aplicável ao processo continua sendo necessária antes de qualquer ato processual.
+
+## Licença
+
+Copyright (c) 2026 Vanessa GLdev. Distribuído sob a licença MIT. Veja o arquivo
+[LICENSE](LICENSE).
