@@ -1,13 +1,18 @@
 /* ============================================================================
    CALCULADORA DE PRAZOS TJSP — MOTOR DE CÁLCULO
-   Fonte de verdade: calendário oficial de expediente forense TJSP (São Paulo,
-   2026). Para trocar de ano, substitua o objeto `calendario` abaixo por outro
-   com a mesma estrutura (ex.: ano 2027). O motor não precisa de alterações.
+   Fonte de verdade: calendário oficial de expediente forense TJSP (São Paulo).
+   2026: calendário oficial do TJSP de 2026.
+   2027: Provimento CSM nº 2.850/2026 (DJE de 17/11/2026) + feriado municipal
+         da Capital (25/01).
+   Para um novo ano: acrescente as datas em `naoUteis`, o período em `recessos`,
+   o ano em `anos` e atualize `ano` (último ano cadastrado). O motor não muda.
    ============================================================================ */
 
 var calendario = {
-  ano: 2026,
+  ano: 2027,            /* último ano cadastrado */
+  anos: [2026, 2027],
   naoUteis: {
+    /* 2026 */
     "2026-01-25": "Fundação da Cidade de São Paulo",
     "2026-02-16": "Carnaval",
     "2026-02-17": "Carnaval",
@@ -26,14 +31,41 @@ var calendario = {
     "2026-11-02": "Finados",
     "2026-11-20": "Dia Nacional de Zumbi e da Consciência Negra",
     "2026-12-07": "Suspensão do expediente",
-    "2026-12-08": "Dia da Justiça"
+    "2026-12-08": "Dia da Justiça",
+    /* 2027 — Provimento CSM nº 2.850/2026 (1º a 06/01 e 20 a 31/12: recesso) */
+    "2027-01-25": "Fundação da Cidade de São Paulo",
+    "2027-02-08": "Carnaval",
+    "2027-02-09": "Carnaval",
+    "2027-03-25": "Endoenças",
+    "2027-03-26": "Sexta-feira da Paixão",
+    "2027-04-21": "Tiradentes",
+    "2027-05-27": "Corpus-Christi",
+    "2027-05-28": "Suspensão do expediente",
+    "2027-07-09": "Data Magna do Estado de São Paulo",
+    "2027-09-06": "Suspensão do expediente",
+    "2027-09-07": "Independência do Brasil",
+    "2027-10-11": "Suspensão do expediente",
+    "2027-10-12": "Nossa Senhora Aparecida",
+    "2027-10-28": "Dia do Servidor Público",
+    "2027-11-01": "Suspensão do expediente",
+    "2027-11-02": "Finados",
+    "2027-11-15": "Proclamação da República",
+    "2027-12-08": "Dia da Justiça"
   },
-  recesso: {
-    inicio: "2026-12-20",
-    fim: "2027-01-20",
-    motivo: "Recesso / suspensão da contagem"
-  }
+  /* suspensão dos prazos de 20/12 a 20/01 (CPC, art. 220) */
+  recessos: [
+    { inicio: "2026-12-20", fim: "2027-01-20", motivo: "Recesso / suspensão da contagem" },
+    { inicio: "2027-12-20", fim: "2028-01-20", motivo: "Recesso / suspensão da contagem" }
+  ]
 };
+
+/* Período de recesso que contém a data ISO, ou null. */
+function recessoDe(iso) {
+  for (const r of calendario.recessos) {
+    if (iso >= r.inicio && iso <= r.fim) return r;
+  }
+  return null;
+}
 
 /* Gera "YYYY-MM-DD" a partir de um Date, usando horário LOCAL.
    Nunca usar toISOString() aqui: desloca a data por causa de UTC/fuso. */
@@ -65,9 +97,8 @@ function motivoNaoUtil(data) {
   if (dia === 0) return "Domingo";
   if (dia === 6) return "Sábado";
   if (calendario.naoUteis[iso]) return calendario.naoUteis[iso];
-  if (iso >= calendario.recesso.inicio && iso <= calendario.recesso.fim) {
-    return calendario.recesso.motivo;
-  }
+  const rec = recessoDe(iso);
+  if (rec) return rec.motivo;
   return "Não informado";
 }
 
@@ -78,7 +109,7 @@ function isDiaUtil(data) {
 
   if (dia === 0 || dia === 6) return false;
   if (calendario.naoUteis[iso]) return false;
-  if (iso >= calendario.recesso.inicio && iso <= calendario.recesso.fim) return false;
+  if (recessoDe(iso)) return false;
 
   return true;
 }
@@ -164,6 +195,7 @@ if (typeof window !== "undefined") {
   window.dataDeISO = dataDeISO;
   window.addDias = addDias;
   window.motivoNaoUtil = motivoNaoUtil;
+  window.recessoDe = recessoDe;
   window.isDiaUtil = isDiaUtil;
   window.formatar = formatar;
   window.dataInicialDoPrazo = dataInicialDoPrazo;
@@ -176,6 +208,7 @@ if (typeof module !== "undefined" && module.exports) {
     dataDeISO: dataDeISO,
     addDias: addDias,
     motivoNaoUtil: motivoNaoUtil,
+    recessoDe: recessoDe,
     isDiaUtil: isDiaUtil,
     formatar: formatar,
     dataInicialDoPrazo: dataInicialDoPrazo,

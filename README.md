@@ -17,9 +17,9 @@ A ferramenta roda **localmente no navegador** — sem backend e sem dependência
 
 ## Calendário atual
 
-**TJSP — São Paulo — 2026.**
+**TJSP — São Paulo — 2026 e 2027** (2027: Provimento CSM nº 2.850/2026).
 
-O calendário é mantido manualmente a cada ano a partir da fonte oficial do TJSP. Para trocar de ano, basta substituir o objeto `calendario` em `calculadora.js` pela nova competência — o motor de cálculo não precisa de alterações.
+O calendário é mantido manualmente a cada ano a partir da fonte oficial do TJSP. Para incluir um novo ano, acrescente as datas e o recesso no objeto `calendario` em `calculadora.js` — o motor de cálculo não precisa de alterações.
 
 ## Testes
 
@@ -38,7 +38,7 @@ O resultado esperado é a saída `TODOS OS TESTES PASSARAM` (exit code `0`).
 | `index.html` | Interface da calculadora |
 | `style.css` | Estilos |
 | `app.js` | Camada de interface (DOM) |
-| `calculadora.js` | Motor de cálculo e calendário TJSP 2026 |
+| `calculadora.js` | Motor de cálculo e calendário TJSP 2026 e 2027 |
 | `testes.js` | Bateria de testes automatizados |
 
 ## Fonte

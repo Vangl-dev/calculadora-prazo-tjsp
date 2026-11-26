@@ -23,10 +23,10 @@ function calcular() {
   }
 
   const publicacao = dataDeISO(inicioInput);
-  if (publicacao.getFullYear() !== calendario.ano) {
+  if (calendario.anos.indexOf(publicacao.getFullYear()) === -1) {
     alert(
-      "Esta versão está configurada para o calendário TJSP de " +
-      calendario.ano +
+      "Esta versão tem o calendário TJSP de " +
+      calendario.anos.join(" e ") +
       ". Atualize o calendário antes de calcular outra competência."
     );
     return;
